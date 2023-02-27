@@ -1,4 +1,8 @@
 import { createAction, props } from '@ngrx/store';
+import { Todo } from './todos.model';
 
-export const addTodo = createAction('[Counter Component] Increment', props<{ value: string }>());
-export const removeTodo = createAction('[Counter Component] Decrement', props<{ id: number }>());
+export const initializeTodos = createAction('[todo] init');
+export const initializeTodosSuccess = createAction('[todo] init success', props<{ todos: Todo[] }>());
+
+export const addTodo = createAction('[todo] add', props<{ value: string }>());
+export const removeTodo = createAction('[todo] remove', props<{ id: number }>());

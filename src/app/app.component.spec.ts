@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Store } from '@ngrx/store';
 import { Todo } from './store/todos.model';
-import { addTodo, removeTodo } from './store/actions';
+import { addTodo, initializeTodos, removeTodo } from './store/actions';
 import { selectTodos } from './store/selector';
 
 describe('AppComponent', () => {
@@ -63,5 +63,13 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     expect(component.todos).toEqual([{ id: 1, value: 'advitrae' }]);
+  });
+
+  it('should trigger initialize action', () => {
+    const dispatchSpy = spyOn(store, 'dispatch').and.callThrough();
+
+    component.ngOnInit();
+
+    expect(dispatchSpy).toHaveBeenCalledWith(initializeTodos());
   });
 });

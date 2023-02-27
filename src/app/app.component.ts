@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { addTodo, removeTodo } from './store/actions';
+import { addTodo, initializeTodos, removeTodo } from './store/actions';
 import { selectRandomTodo, selectTodos } from './store/selector';
 import { Todo } from './store/todos.model';
 
@@ -12,7 +12,6 @@ import { Todo } from './store/todos.model';
 export class AppComponent implements OnInit{
   constructor(private store: Store<{ todos: Todo[] }>) { }
 
-  // Selectors in the ngOnInit instead of constructor for testing access
   public ngOnInit(): void {
     this.store.select(selectTodos).subscribe((todos) => {
       this.todos = todos;
@@ -21,6 +20,9 @@ export class AppComponent implements OnInit{
     this.store.select(selectRandomTodo).subscribe((todo) => {
       this.randomTodo = todo;
     });
+
+    // Action to initialize data
+    this.store.dispatch(initializeTodos());
   }
 
   public todos: Todo[] = [];
