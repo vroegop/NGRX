@@ -1,0 +1,13 @@
+<h1>Todo App</h1>
+
+<p *ngIf="todos.length === 0">Nothing to do.</p>
+
+<div *ngFor="let todo of todos">
+  <p> <button (click)="removeItem(todo.id)"> Remove </button> {{todo.value}} </p>
+</div>
+
+<hr>
+
+<label for="item-input">Add a todo item:</label>
+<input type="text" id="item-input" #newItem>
+<button type="button" (click)="addNewItem(newItem.value)">Add to list</button>
