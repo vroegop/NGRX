@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { todoReducer } from './store/reducer';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,8 @@ import { StoreModule } from '@ngrx/store';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({ todos: todoReducer }),
+    StoreDevtoolsModule.instrument({ maxAge: 50 }),
   ],
   providers: [],
   bootstrap: [AppComponent]
