@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { addTodo, removeTodo } from './store/actions';
+import { selectRandomTodo, selectTodos } from './store/selector';
 import { Todo } from './store/todos.model';
 
 @Component({
@@ -13,14 +14,18 @@ export class AppComponent implements OnInit{
 
   // Selectors in the ngOnInit instead of constructor for testing access
   public ngOnInit(): void {
-    this.store.select('todos').subscribe((todos) => {
+    this.store.select(selectTodos).subscribe((todos) => {
       this.todos = todos;
+    });
+
+    this.store.select(selectRandomTodo).subscribe((todo) => {
+      this.randomTodo = todo;
     });
   }
 
   public todos: Todo[] = [];
+  public randomTodo: Todo | undefined;
 
-  // Allowing duplicates is a feature
   public addNewItem(value: string) {
     this.store.dispatch(addTodo({ value }));
   }
