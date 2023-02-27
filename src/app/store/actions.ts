@@ -1,4 +1,4 @@
 import { createAction, props } from '@ngrx/store';
 
-export const addTodo = createAction('[Counter Component] Increment', props<{ value: string }>());
-export const removeTodo = createAction('[Counter Component] Decrement', props<{ id: number }>());
+export const addTodo = createAction('[todo] add', props<{ value: string }>());
+export const removeTodo = createAction('[todo] remove', props<{ id: number }>());

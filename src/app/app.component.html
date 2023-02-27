@@ -11,3 +11,10 @@
 <label for="item-input">Add a todo item:</label>
 <input type="text" id="item-input" #newItem>
 <button type="button" (click)="addNewItem(newItem.value)">Add to list</button>
+
+<hr>
+
+<div *ngIf="randomTodo">
+  <h2>Featured Todo:</h2>
+  <p>{{ randomTodo.value }}</p>
+</div>

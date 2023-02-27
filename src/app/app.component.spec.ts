@@ -4,11 +4,12 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Store } from '@ngrx/store';
 import { Todo } from './store/todos.model';
 import { addTodo, removeTodo } from './store/actions';
+import { selectTodos } from './store/selector';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
-  let store: MockStore<{ 'todos': Todo[] }>;
+  let store: MockStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,7 +20,7 @@ describe('AppComponent', () => {
       ],
       providers: [
         provideMockStore({
-          selectors: [{selector: 'todos', value: []}]
+          selectors: [{selector: selectTodos, value: []}]
         }),
       ]
     }).compileComponents();
@@ -55,7 +56,7 @@ describe('AppComponent', () => {
 
   it('should show todos if the store has them', () => {
     // Override selector to see if its values reflect in the component
-    store.overrideSelector('todos', [ { id: 1, value: 'advitrae' } ]);
+    store.overrideSelector(selectTodos, [ { id: 1, value: 'advitrae' } ]);
     store.refreshState();
 
     // After overriding trigger ngOnInit
